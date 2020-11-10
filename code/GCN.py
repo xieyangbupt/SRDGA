@@ -44,23 +44,23 @@ class GCN(nn.Module):
         outputs = self.fc(x)
         return outputs
 
-class DGGCN(nn.Module):
+class SRDGAGCN(nn.Module):
     '''
-    DGGCN的实现
+    SRDGAGCN的实现
     '''
     def __init__(self, encoder, gcn, num_classes):
-        super(DGGCN, self).__init__()
+        super(SRDGAGCN, self).__init__()
         self.encoder = encoder
         d = self.encoder.last_dim
         dim = self.encoder.last_dim
         # dim = 100
-        if gcn == 'DGGCN':
+        if gcn == 'SRDGAGCN':
             self.conv1 = GCNConv(d, dim, flow='source_to_target')
             self.conv2 = GCNConv(dim, dim, flow='source_to_target')
-        elif gcn == 'DGSAGE':
+        elif gcn == 'SRDGASAGE':
             self.conv1 = SAGEConv(d, dim, flow='source_to_target')
             self.conv2 = SAGEConv(dim, dim, flow='source_to_target')
-        elif gcn == 'DGGAT':
+        elif gcn == 'SRDGAGAT':
             self.conv1 = GATConv(d, dim, flow='source_to_target')
             self.conv2 = GATConv(dim, dim, flow='source_to_target')
         # 门控

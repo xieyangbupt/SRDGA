@@ -9,7 +9,7 @@ from visdom import Visdom
 from TrainTest import train, test, pred_unlabeled
 from Dataset import Weibo
 from Encoder import BiLSTM, TextCNN, FastText, TransformerModel
-from GCN import GCN, DGGCN
+from GCN import GCN, SRDGAGCN
 
 def main(encoder, gcn, edge):
     '''main函数，节点分类'''
@@ -82,8 +82,8 @@ def main(encoder, gcn, edge):
     
     # 模型实例
     if args.gcn:
-        if args.gcn in ['DGGAT', 'DGGCN', 'DGSAGE']:
-            model = DGGCN(encoder, args.gcn, num_classes).to(device)
+        if args.gcn in ['SRDGAGAT', 'SRDGAGCN', 'SRDGASAGE']:
+            model = SRDGAGCN(encoder, args.gcn, num_classes).to(device)
         elif args.gcn in ['GAT', 'GCN', 'SAGE']:
             model = GCN(encoder, args.gcn, num_classes).to(device)
     else:
@@ -174,6 +174,6 @@ def main(encoder, gcn, edge):
 # 程序入口
 if __name__ == '__main__':
     for e in ['FastText', 'TextCNN', 'BiLSTM', 'TransformerModel']:
-        for g in ['GCN']: # 'DGGAT', 'DGGCN', 'DGSAGE'
-            for edge in ['social.origin']: # 'social.origin', 'social.reverse', 'social.undirected'
+        for g in ['GCN']:
+            for edge in ['social.origin']:
                 main(e, g, edge)

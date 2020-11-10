@@ -7,6 +7,7 @@ Datasets &amp; Codes of the paper A Social Relationship Direction Gating Algorit
 - python 3.6
 - pytorch 1.3.1
 - torch-geometric 1.3.2
+- visdom
 
 ## How to run
 
